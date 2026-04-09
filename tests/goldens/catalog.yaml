@@ -1,0 +1,40 @@
+refs:
+  - id: ssh/prod/deploy
+    backend: ssh-agent
+    selector:
+      fingerprint: "SHA256:abc123"
+      comment: "deploy@prod"
+    class: ssh
+    owner: platform
+    scope: prod
+    allowed_ops: [ssh]
+    lease_ttl_seconds: 900
+    break_glass: false
+    rotation_hint: manual
+
+  - id: ssh/staging/ops
+    backend: ssh-agent
+    selector:
+      fingerprint: "SHA256:def456"
+      comment: "ops@staging"
+    class: ssh
+    owner: platform
+    scope: staging
+    allowed_ops: [ssh]
+    lease_ttl_seconds: 1800
+    break_glass: false
+    rotation_hint: manual
+    aliases: [staging-ops]
+
+  - id: signing/release/macos
+    backend: ssh-agent
+    selector:
+      fingerprint: "SHA256:ghi789"
+      comment: "release-signing"
+    class: signing
+    owner: release-eng
+    scope: release
+    allowed_ops: [sign]
+    lease_ttl_seconds: 300
+    break_glass: false
+    rotation_hint: quarterly

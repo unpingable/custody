@@ -1,0 +1,29 @@
+rules:
+  - id: allow-prod-deploy-ssh
+    ref: ssh/prod/deploy
+    allow_ops: [ssh]
+    require:
+      standing:
+        role: deployer
+        env: prod
+      ttl_seconds: 900
+    governor: false
+
+  - id: allow-staging-ops-ssh
+    ref: ssh/staging/ops
+    allow_ops: [ssh]
+    require:
+      standing:
+        role: operator
+        env: staging
+      ttl_seconds: 1800
+    governor: false
+
+  - id: release-signing-elevated
+    ref: signing/release/macos
+    allow_ops: [sign]
+    require:
+      standing:
+        role: release-engineer
+      ttl_seconds: 300
+    governor: true
