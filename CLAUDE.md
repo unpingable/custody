@@ -43,6 +43,15 @@ secretctl --help
 - Policy and catalog files: YAML
 - Enums serialize as stable strings, not integers
 
+## Debugging Discipline
+
+Shared doctrine across the constellation (annotated source: `agent_gov/CLAUDE.md`):
+
+- **Default to reduction.** Escalate to integration only after reduction has failed to discriminate.
+- **Belief must be earned by the cheapest available falsification, not constructed by accretion.**
+
+**In this project**, "load-bearing" means any moment a lease is about to be issued, a mediated operation about to execute, or a handle about to be returned to a caller. The cheapest discriminating test is usually: re-verify standing against current policy *right now*, not against the cached attestation from the request. Operation-not-blob is the static version of this rule; the debugging discipline is its dynamic version.
+
 ## Don't
 
 - Don't add `get_bytes()` or any raw export path
